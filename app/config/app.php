@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://localhost',
+	'url' => 'http://vukhf.dev',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -107,6 +107,15 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
+        'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
+        'Baum\BaumServiceProvider',
+        'Cartalyst\Sentry\SentryServiceProvider',
+        'Barryvdh\MigrationGenerator\MigrationGeneratorServiceProvider',
+        'DaveJamesMiller\Breadcrumbs\ServiceProvider',
+        'Cviebrock\EloquentSluggable\SluggableServiceProvider',
+
+        //'Barryvdh\Debugbar\ServiceProvider',
+
 	),
 
 	/*
@@ -172,6 +181,15 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
+
+        'Sentry'          => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
+        'Ardent'          => 'LaravelBook\Ardent\Ardent',
+
+        'Breadcrumbs'     => 'DaveJamesMiller\Breadcrumbs\Facade',
+
+        'Sluggable' => 'Cviebrock\EloquentSluggable\Facades\Sluggable',
+
+        //'Debugbar'        => 'Barryvdh\Debugbar\Facade',
 
 	),
 
