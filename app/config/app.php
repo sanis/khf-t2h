@@ -111,6 +111,8 @@ return array(
         'Baum\BaumServiceProvider',
         'Cartalyst\Sentry\SentryServiceProvider',
         'Barryvdh\MigrationGenerator\MigrationGeneratorServiceProvider',
+        'DaveJamesMiller\Breadcrumbs\ServiceProvider',
+
         //'Barryvdh\Debugbar\ServiceProvider',
 
 	),
@@ -181,6 +183,8 @@ return array(
 
         'Sentry'          => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
         'Ardent'          => 'LaravelBook\Ardent\Ardent',
+
+        'Breadcrumbs'     => 'DaveJamesMiller\Breadcrumbs\Facade',
 
         //'Debugbar'        => 'Barryvdh\Debugbar\Facade',
 

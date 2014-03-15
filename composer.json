@@ -9,8 +9,9 @@
         "baum/baum": "~1.0",
         "cartalyst/sentry": "2.1.*",
         "laravelbook/ardent": "dev-master",
-        "barryvdh/laravel-migration-generator": "dev-master"
-        //"barryvdh/laravel-debugbar": "1.*"
+        "barryvdh/laravel-migration-generator": "dev-master",
+        //"barryvdh/laravel-debugbar": "1.*",
+		"davejamesmiller/laravel-breadcrumbs": "~2.2.0"
 	},
 	"autoload": {
 		"classmap": [
