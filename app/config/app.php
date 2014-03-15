@@ -110,6 +110,7 @@ return array(
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
         'Baum\BaumServiceProvider',
         'Cartalyst\Sentry\SentryServiceProvider',
+        'Barryvdh\MigrationGenerator\MigrationGeneratorServiceProvider',
         //'Barryvdh\Debugbar\ServiceProvider',
 
 	),
