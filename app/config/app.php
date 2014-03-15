@@ -108,6 +108,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
+        //'Barryvdh\Debugbar\ServiceProvider',
 
 	),
 
@@ -174,6 +175,8 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
+
+        //'Debugbar'        => 'Barryvdh\Debugbar\Facade',
 
 	),
 
