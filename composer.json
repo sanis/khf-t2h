@@ -10,6 +10,7 @@
         "cartalyst/sentry": "2.1.*",
         "laravelbook/ardent": "dev-master",
         "barryvdh/laravel-migration-generator": "dev-master",
+        "cviebrock/eloquent-sluggable": "1.0.*",
         //"barryvdh/laravel-debugbar": "1.*",
 		"davejamesmiller/laravel-breadcrumbs": "~2.2.0"
 	},

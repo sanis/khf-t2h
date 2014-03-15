@@ -112,6 +112,7 @@ return array(
         'Cartalyst\Sentry\SentryServiceProvider',
         'Barryvdh\MigrationGenerator\MigrationGeneratorServiceProvider',
         'DaveJamesMiller\Breadcrumbs\ServiceProvider',
+        'Cviebrock\EloquentSluggable\SluggableServiceProvider',
 
         //'Barryvdh\Debugbar\ServiceProvider',
 
@@ -185,6 +186,8 @@ return array(
         'Ardent'          => 'LaravelBook\Ardent\Ardent',
 
         'Breadcrumbs'     => 'DaveJamesMiller\Breadcrumbs\Facade',
+
+        'Sluggable' => 'Cviebrock\EloquentSluggable\Facades\Sluggable',
 
         //'Debugbar'        => 'Barryvdh\Debugbar\Facade',
 
