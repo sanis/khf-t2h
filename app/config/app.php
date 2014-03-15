@@ -109,6 +109,7 @@ return array(
 
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
         'Baum\BaumServiceProvider',
+        'Cartalyst\Sentry\SentryServiceProvider',
         //'Barryvdh\Debugbar\ServiceProvider',
 
 	),
@@ -177,6 +178,7 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 
+        'Sentry' => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
         //'Debugbar'        => 'Barryvdh\Debugbar\Facade',
 
 	),

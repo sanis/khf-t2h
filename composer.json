@@ -6,7 +6,8 @@
 	"require": {
 		"laravel/framework": "4.1.*",
         "barryvdh/laravel-ide-helper": "1.*",
-        "baum/baum": "~1.0"
+        "baum/baum": "~1.0",
+        "cartalyst/sentry": "2.1.*"
         //"barryvdh/laravel-debugbar": "1.*"
 	},
 	"autoload": {
