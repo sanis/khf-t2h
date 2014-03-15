@@ -108,6 +108,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
+        'Baum\BaumServiceProvider',
         //'Barryvdh\Debugbar\ServiceProvider',
 
 	),
