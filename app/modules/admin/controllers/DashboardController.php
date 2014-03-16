@@ -1,7 +1,29 @@
 <?php
+
+namespace App\Modules\Admin\Controllers;
+
+use View, Input, Response, User, Sentry;
+
 /**
- * Created by PhpStorm.
- * User: sanis
- * Date: 3/16/14
- * Time: 8:23 PM
- */ 
+ * Class DashboardController
+ *
+ * @category Test
+ * @package  App\Modules\Admin\Controllers
+ * @author   Justinas Bolys <justinas.bolys@gmail.com>
+ * @link     http://sanis.lt
+ *
+ * @license  GPL http://sanis.lt/gpl.html
+ */
+class DashboardController extends \BaseController
+{
+
+    /**
+     * test
+     *
+     * @return string
+     */
+    public function getDashboardPage()
+    {
+        return 'ok show dashboard';
+    }
+}

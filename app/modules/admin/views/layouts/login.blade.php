@@ -20,12 +20,12 @@
     <div class="panel panel-primary">
         <div class="panel-body">
             <h4 class="text-center" style="margin-bottom: 25px;">{{ trans('admin::login.wellcome_login') }}</h4>
-            <form action="#" class="form-horizontal" style="margin-bottom: 0px !important;">
+            {{ Form::open(array('route' => 'admin.login.post', 'class'=>'form-horizontal','style'=>'margin-bottom: 0px !important;', 'id'=>'admin_login')) }}
                 <div class="form-group">
                     <div class="col-sm-12">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                            <input type="text" class="form-control" id="username" placeholder="{{ trans('admin::login.username') }}">
+                            {{ Form::text('username', null, array('class'=>'form-control', 'placeholder'=>trans('admin::login.username'), 'id'=>'username')) }}
                         </div>
                     </div>
                 </div>
@@ -33,22 +33,24 @@
                     <div class="col-sm-12">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                            <input type="password" class="form-control" id="password" placeholder="{{ trans('admin::login.password') }}">
+                            {{ Form::password('password', array('class'=>'form-control', 'placeholder'=>trans('admin::login.password'), 'id'=>'password')) }}
                         </div>
                     </div>
                 </div>
                 <div class="clearfix">
-                    <div class="pull-right"><label><input type="checkbox" style="margin-bottom: 20px" checked=""> {{ trans('admin::login.remember_me') }}</label></div>
+                    <div class="pull-right"><label for="remember">{{ Form::checkbox('remember',1,true,array('style'=>'margin-bottom: 20px')) }} {{ trans('admin::login.remember_me') }}</label></div>
                 </div>
-            </form>
+            {{ Form::close() }}
 
         </div>
         <div class="panel-footer">
-            <a href="extras-forgotpassword.htm" class="pull-left btn btn-link" style="padding-left:0">{{ trans('admin::login.forgot_pass') }}?</a>
+            <a href="{{ URL::route('admin.remind') }}" class="pull-left btn btn-link" style="padding-left:0">{{ trans('admin::login.forgot_pass') }}?</a>
 
             <div class="pull-right">
-                <a href="#" class="btn btn-default">{{ trans('admin::login.reset') }}</a>
-                <a href="index.htm" class="btn btn-primary">{{ trans('admin::login.log_in') }}</a>
+                <a href="{{ URL::route('admin.login') }}" class="btn btn-default">{{ trans('admin::login.reset') }}</a>
+
+                {{ Form::button(trans('admin::login.log_in'), array('class'=>'btn btn-primary', 'form'=>'admin_login', 'type'=>'submit')) }}
+
             </div>
         </div>
     </div>
