@@ -115,6 +115,8 @@ return array(
         'Cviebrock\EloquentSluggable\SluggableServiceProvider',
         'Krucas\Notification\NotificationServiceProvider',
 
+        'Way\Generators\GeneratorsServiceProvider'
+
         //'Barryvdh\Debugbar\ServiceProvider',
 
 	),
