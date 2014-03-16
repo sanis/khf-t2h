@@ -113,6 +113,7 @@ return array(
         'Barryvdh\MigrationGenerator\MigrationGeneratorServiceProvider',
         'DaveJamesMiller\Breadcrumbs\ServiceProvider',
         'Cviebrock\EloquentSluggable\SluggableServiceProvider',
+        'Krucas\Notification\NotificationServiceProvider',
 
         //'Barryvdh\Debugbar\ServiceProvider',
 
@@ -188,6 +189,8 @@ return array(
         'Breadcrumbs'     => 'DaveJamesMiller\Breadcrumbs\Facade',
 
         'Sluggable' => 'Cviebrock\EloquentSluggable\Facades\Sluggable',
+
+        'Notification' => 'Krucas\Notification\Facades\Notification'
 
         //'Debugbar'        => 'Barryvdh\Debugbar\Facade',
 
