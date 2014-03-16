@@ -1,0 +1,1 @@
+php artisan migration-generate departments,events,groups,lectures,lecture_rooms,lecture_student_groups,menu,news,news_categories,pages,sands,semesters,student_groups,studies,subjects,subjects_teachers,teachers,throttle,users_groups,users
