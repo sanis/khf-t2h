@@ -12,11 +12,13 @@
         "barryvdh/laravel-migration-generator": "dev-master",
         "cviebrock/eloquent-sluggable": "1.0.*",
         "edvinaskrucas/notification": "2.*",
+        "creolab/laravel-modules": "dev-master",
         //"barryvdh/laravel-debugbar": "1.*",
 		"davejamesmiller/laravel-breadcrumbs": "~2.2.0"
 	},
 	"autoload": {
 		"classmap": [
+            "app/modules",
 			"app/commands",
 			"app/controllers",
 			"app/models",
