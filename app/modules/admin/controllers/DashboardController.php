@@ -17,6 +17,12 @@ use View, Input, Response, User, Sentry;
 class DashboardController extends \BaseController
 {
 
+    public function __construct()
+    {
+        //Check CSRF token on POST
+        $this->beforeFilter('csrf', array('on' => 'post'));
+    }
+
     /**
      * test
      *

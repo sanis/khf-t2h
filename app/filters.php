@@ -78,3 +78,61 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+
+// Checks if user is logged in
+Route::filter('admin.loggedIn', function()
+{
+    if ( ! Sentry::check() ) {
+        return Redirect::route('login');
+    }
+});
+
+// Checks if user is logged out
+Route::filter('admin.loggedOut', function()
+{
+    if ( Sentry::check() ) {
+        return Redirect::route('home');
+    }
+});
+
+// Checks if user has access
+Route::filter('hasAccess', function($route, $request, $value)
+{
+    try
+    {
+        $user = Sentry::getUser();
+        if( ! $user->hasAccess($value))
+        {
+            return Redirect::route('login')->withErrors(array(trans('user.noaccess')));
+        }
+    }
+    catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
+    {
+        return Redirect::route('login')->withErrors(array(trans('user.notfound')));
+    }
+
+});
+
+// checks in user in group
+Route::filter('inGroup', function($route, $request, $value)
+{
+    try
+    {
+        $user = Sentry::getUser();
+        $group = Sentry::findGroupByName($value);
+        if( ! $user->inGroup($group))
+        {
+            return Redirect::route('login')->withErrors(array(trans('user.noaccess')));
+        }
+    }
+    catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
+    {
+        return Redirect::route('login')->withErrors(array(trans('user.notfound')));
+    }
+
+    catch (Cartalyst\Sentry\Groups\GroupNotFoundException $e)
+    {
+        return Redirect::route('login')->withErrors(array(trans('user.group_notfound')));
+    }
+});

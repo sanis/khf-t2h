@@ -10,6 +10,16 @@ use View, Input, Response, User, Sentry;
  */
 class LoginController extends \BaseController
 {
+
+    public function __construct()
+    {
+        //Check CSRF token on POST
+        $this->beforeFilter('csrf', array('on' => 'post'));
+
+        $this->beforeFilter('admin.loggedOut', array('except' => 'getLogoutPage'));
+        $this->beforeFilter('admin.loggedIn', array('only' => 'getLogoutPage'));
+    }
+
     /**
      * @return \Illuminate\View\View
      */
