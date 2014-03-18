@@ -9,13 +9,18 @@
 return array(
 
     'wellcome_login' => 'Hello, please login to get in!',
+    'wellcome_remind' => 'Lost your password? We\'ll send you new one',
     'username'       => 'Username',
     'password'      => 'Password',
+    'email'         => 'Email',
     'remember_me'   => 'Remember me',
     'forgot_pass'   => 'Forgot password',
     'reset'         => 'Reset',
     'log_in'        => 'Log In',
-    'login_title'   => 'Log Into the Dashboard'
+    'login_title'   => 'Log Into the Dashboard',
+    'remind_button' => 'Remind via email',
+    'back'          => 'Back',
+    'remind_title'  => 'Remind password',
 
 
 );

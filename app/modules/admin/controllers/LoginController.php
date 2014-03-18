@@ -1,7 +1,7 @@
 <?php
 namespace App\Modules\Admin\Controllers;
 
-use View, Input, Response, User, Sentry;
+use View, Input, Response, User, Sentry, Notification, Redirect;
 
 /**
  * Class LoginController
@@ -25,7 +25,8 @@ class LoginController extends \BaseController
      */
     public function getLoginForm()
     {
-        return View::make('admin::layouts.login');
+        View::share('page_title', trans('admin::login.login_title'));
+        return View::make('admin::forms.login');
     }
 
     /**
@@ -33,7 +34,10 @@ class LoginController extends \BaseController
      */
     public function postLoginForm()
     {
-        return View::make('admin::layouts.login');
+        Notification::success(array('Success message','test'));
+        Notification::danger('error message');
+        View::share('page_title', trans('admin::login.login_title'));
+        return Redirect::route('admin.login')->withInput();
     }
 
     /**
@@ -42,16 +46,21 @@ class LoginController extends \BaseController
     public function getLogoutPage()
     {
         Sentry::logout();
-        return 'logged out';
+        Notification::info('Logged out.');
+        return Redirect::route('admin.login');
     }
 
-    public function getRemindPasswordFrom()
+    public function getRemindPasswordForm()
     {
-        return 'remind';
+        View::share('page_title', trans('admin::login.remind_title'));
+        return View::make('admin::forms.remind');
     }
 
-    public function postRemindPasswordFrom()
+    public function postRemindPasswordForm()
     {
-        return 'post remind';
+        View::share('page_title', trans('admin::login.remind_title'));
+        Notification::success(array('Success message','test'));
+        Notification::danger('error message');
+        return Redirect::route('admin.remind')->withInput();
     }
 }

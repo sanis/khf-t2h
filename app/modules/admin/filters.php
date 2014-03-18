@@ -10,6 +10,7 @@
 Route::filter('admin.loggedIn', function()
 {
     if ( ! Sentry::check() ) {
+        Notification::danger(trans('admin::user.not_logged_in'));
         return Redirect::route('admin.login');
     }
 });
@@ -18,6 +19,7 @@ Route::filter('admin.loggedIn', function()
 Route::filter('admin.loggedOut', function()
 {
     if ( Sentry::check() ) {
+        Notification::danger(trans('admin::user.not_for_logged_in'));
         return Redirect::route('admin.dashboard');
     }
 });
@@ -30,12 +32,14 @@ Route::filter('admin.hasAccess', function($route, $request, $value)
         $user = Sentry::getUser();
         if( ! $user->hasAccess($value))
         {
-            return Redirect::route('admin.login')->withErrors(array(trans('admin:user.noaccess')));
+            Notification::danger(trans('admin::user.no_access'));
+            return Redirect::route('admin.login');
         }
     }
     catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
     {
-        return Redirect::route('admin.login')->withErrors(array(trans('admin:user.notfound')));
+        Notification::danger(trans('admin::user.not_found'));
+        return Redirect::route('admin.login');
     }
 
 });
@@ -49,16 +53,19 @@ Route::filter('admin.inGroup', function($route, $request, $value)
         $group = Sentry::findGroupByName($value);
         if( ! $user->inGroup($group))
         {
-            return Redirect::route('admin.login')->withErrors(array(trans('admin:user.noaccess')));
+            Notification::danger(trans('admin::user.no_access'));
+            return Redirect::route('admin.login');
         }
     }
     catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
     {
-        return Redirect::route('admin.login')->withErrors(array(trans('admin:user.notfound')));
+        Notification::danger(trans('admin::user.not_found'));
+        return Redirect::route('admin.login');
     }
 
     catch (Cartalyst\Sentry\Groups\GroupNotFoundException $e)
     {
-        return Redirect::route('admin.login')->withErrors(array(trans('admin:user.group_notfound')));
+        Notification::danger(trans('admin::user.group_not_found'));
+        return Redirect::route('admin.login');
     }
 });
