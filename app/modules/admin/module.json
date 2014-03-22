@@ -1,3 +1,4 @@
 {
+    "seeder": "App\\Modules\\Admin\\Seeds\\DatabaseSeeder",
     "enabled": true
 }

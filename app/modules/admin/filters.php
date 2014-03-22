@@ -53,6 +53,7 @@ Route::filter('admin.inGroup', function($route, $request, $value)
         $group = Sentry::findGroupByName($value);
         if( ! $user->inGroup($group))
         {
+            Sentry::logout();
             Notification::danger(trans('admin::user.no_access'));
             return Redirect::route('admin.login');
         }

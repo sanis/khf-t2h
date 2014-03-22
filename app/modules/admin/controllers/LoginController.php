@@ -1,6 +1,7 @@
 <?php
 namespace App\Modules\Admin\Controllers;
 
+use DaveJamesMiller\Breadcrumbs\Exception;
 use View, Input, Response, User, Sentry, Notification, Redirect;
 
 /**
@@ -34,10 +35,19 @@ class LoginController extends \BaseController
      */
     public function postLoginForm()
     {
-        Notification::success(array('Success message','test'));
-        Notification::danger('error message');
-        View::share('page_title', trans('admin::login.login_title'));
-        return Redirect::route('admin.login')->withInput();
+        $credentials = array(
+            'email'=>Input::get('username'),
+            'password'=>Input::get('password'),
+        );
+        $remember = (bool)Input::get('remember');
+        $user = $this->_loginUser($credentials, $remember);
+        if (is_object($user)) {
+            echo 'LOGGED IN';
+        } else {
+            Notification::danger($user);
+            View::share('page_title', trans('admin::login.login_title'));
+            return Redirect::route('admin.login')->withInput();
+        }
     }
 
     /**
@@ -62,5 +72,45 @@ class LoginController extends \BaseController
         Notification::success(array('Success message','test'));
         Notification::danger('error message');
         return Redirect::route('admin.remind')->withInput();
+    }
+
+    private function _loginUser($credentials, $remember) {
+        try {
+            $user = Sentry::authenticate($credentials, $remember);
+        } catch (\Cartalyst\Sentry\Users\LoginRequiredException $e)
+        {
+            return trans('admin::login.login_required');
+        }
+        catch (\Cartalyst\Sentry\Users\PasswordRequiredException $e)
+        {
+            return trans('admin::login.password_required');
+        }
+        catch (\Cartalyst\Sentry\Users\WrongPasswordException $e)
+        {
+            return trans('admin::login.wrong_password');
+        }
+        catch (\Cartalyst\Sentry\Users\UserNotFoundException $e)
+        {
+            return trans('admin::login.user_not_found');
+        }
+        catch (\Cartalyst\Sentry\Users\UserNotActivatedException $e)
+        {
+            return trans('admin::login.user_not_activated');
+        }
+        catch (\Cartalyst\Sentry\Throttling\UserSuspendedException $e)
+        {
+            return trans('admin::login.user_suspended');
+        }
+        catch (\Cartalyst\Sentry\Throttling\UserBannedException $e)
+        {
+            return trans('admin::login.user_banned');
+        }
+        try {
+            $adminGroup = Sentry::findGroupByName('Admin');
+            $user->inGroup($adminGroup);
+        } catch (\Cartalyst\Sentry\Groups\GroupNotFoundException $e) {
+            return trans('admin::login.not_admin');
+        }
+        return $user;
     }
 }
