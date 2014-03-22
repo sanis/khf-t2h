@@ -200,4 +200,8 @@ return array(
 
 	),
 
+    // ADDITIONAL CONFIGURATIONS
+
+    'email' => 'info@vukhf.lt',
+
 );

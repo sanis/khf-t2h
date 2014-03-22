@@ -9,14 +9,6 @@
             <div class="form-group">
                 <div class="col-sm-12">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                        {{ Form::text('username', null, array('class'=>'form-control', 'placeholder'=>trans('admin::login.username'), 'id'=>'username')) }}
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-12">
-                    <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
                         {{ Form::text('email', null, array('class'=>'form-control', 'placeholder'=>trans('admin::login.email'), 'id'=>'email')) }}
                     </div>

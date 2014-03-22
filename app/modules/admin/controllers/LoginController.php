@@ -1,8 +1,7 @@
 <?php
 namespace App\Modules\Admin\Controllers;
 
-use DaveJamesMiller\Breadcrumbs\Exception;
-use View, Input, Response, User, Sentry, Notification, Redirect;
+use View, Input, Config, Sentry, Notification, Redirect, Mail, URL, Validator;
 
 /**
  * Class LoginController
@@ -12,6 +11,9 @@ use View, Input, Response, User, Sentry, Notification, Redirect;
 class LoginController extends \BaseController
 {
 
+    /**
+     *
+     */
     public function __construct()
     {
         //Check CSRF token on POST
@@ -35,13 +37,25 @@ class LoginController extends \BaseController
      */
     public function postLoginForm()
     {
+        $validator = Validator::make(
+            Input::all(),
+            array(
+                'email' => 'required|email',
+                'password' => 'required|min:3',
+            )
+        );
+        if ($validator->fails()) {
+            Notification::danger($validator->messages()->all());
+            return Redirect::route('admin.login')->withInput()->exceptInput('password');
+        }
         $credentials = array(
-            'email'=>Input::get('username'),
+            'email'=>Input::get('email'),
             'password'=>Input::get('password'),
         );
         $remember = (bool)Input::get('remember');
         $user = $this->_loginUser($credentials, $remember);
         if (is_object($user)) {
+            // TODO: this does not echo, but redirects to index. Need to fix this.
             echo 'LOGGED IN';
         } else {
             Notification::danger($user);
@@ -60,20 +74,116 @@ class LoginController extends \BaseController
         return Redirect::route('admin.login');
     }
 
-    public function getRemindPasswordForm()
+    /**
+     * @param null $resetCode
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
+    public function getRemindPasswordForm($resetCode = null)
     {
         View::share('page_title', trans('admin::login.remind_title'));
-        return View::make('admin::forms.remind');
+        if ($resetCode == null) {
+            return View::make('admin::forms.remind');
+        } else {
+            try {
+                $user = Sentry::findUserByResetPasswordCode($resetCode);
+                $adminGroup = Sentry::findGroupByName('Admins');
+            } catch (\Cartalyst\Sentry\Users\UserNotFoundException $e) {
+                Notification::danger(trans('admin::login.user_not_found'));
+                return Redirect::route('admin.remind');
+            }
+            if ($user->inGroup($adminGroup)) {
+                return View::make('admin::forms.remind2')->with('resetCode',$resetCode);
+            } else {
+                Notification::danger(trans('admin::login.not_admin'));
+                return Redirect::route('admin.remind');
+            }
+        }
     }
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function postRemindPasswordForm()
     {
         View::share('page_title', trans('admin::login.remind_title'));
-        Notification::success(array('Success message','test'));
-        Notification::danger('error message');
-        return Redirect::route('admin.remind')->withInput();
+        $resetCode = Input::get('resetCode');
+        if (!empty($resetCode)) {
+            $validator = Validator::make(
+                Input::all(),
+                array(
+                    'resetCode' => 'required',
+                    'password' => 'required|confirmed|min:3'
+                )
+            );
+            if ($validator->fails()) {
+                Notification::danger($validator->messages()->all());
+                return Redirect::route('admin.remind2',array('resetCode'=>$resetCode));
+            }
+            $password = Input::get('password');
+            try {
+                $user = Sentry::findUserByResetPasswordCode($resetCode);
+                $adminGroup = Sentry::findGroupByName('Admins');
+            } catch (\Cartalyst\Sentry\Users\UserNotFoundException $e) {
+                Notification::danger(trans('admin::login.reset_not_found'));
+                return Redirect::route('admin.login');
+            }
+            if ($user->inGroup($adminGroup)) {
+               if ($user->attemptResetPassword($resetCode, $password)) {
+                   Notification::success(trans('admin::login.password_changed'));
+                   return Redirect::route('admin.login');
+                } else {
+                   Notification::danger(trans('admin::login.error_reset'));
+                   return Redirect::route('admin.login');
+               }
+            } else {
+                Notification::danger(trans('admin::login.only_admins_password'));
+                return Redirect::route('admin.login');
+            }
+
+        } else {
+            $validator = Validator::make(
+                Input::all(),
+                array(
+                    'email' => 'required|email'
+                )
+            );
+            if ($validator->fails()) {
+                Notification::danger($validator->messages()->all());
+                return Redirect::route('admin.remind')->withInput();
+            }
+            $email = Input::get('email');
+            try {
+                $user = Sentry::findUserByLogin($email);
+                $adminGroup = Sentry::findGroupByName('Admins');
+            } catch (\Cartalyst\Sentry\Users\UserNotFoundException $e) {
+                Notification::danger(trans('admin::login.user_not_found'));
+                return Redirect::route('admin.remind')->withInput();
+            }
+            if ($user->inGroup($adminGroup)) {
+                $resetCode = $user->getResetPasswordCode();
+                $email = $user->email;
+                $subject = trans('admin::login.password_reset_email_subject');
+                $resetCode = URL::route('admin.remind2', array('resetCode'=>$resetCode));
+                Mail::queue('admin::emails.remind', array('resetLink'=>$resetCode), function($message) use($email, $subject)
+                {
+                    $message->from(Config::get('app.email'))->to($email)->subject($subject);
+                });
+                Notification::success(trans('admin:login.password_reset_send'));
+                return Redirect::route('admin.login')->withInput();
+            } else {
+                Notification::danger(trans('admin::login.only_admins_password'));
+                return Redirect::route('admin.login');
+            }
+        }
     }
 
+    /**
+     * @param $credentials
+     * @param $remember
+     *
+     * @return \Cartalyst\Sentry\Users\UserInterface|string
+     */
     private function _loginUser($credentials, $remember) {
         try {
             $user = Sentry::authenticate($credentials, $remember);
@@ -105,12 +215,11 @@ class LoginController extends \BaseController
         {
             return trans('admin::login.user_banned');
         }
-        try {
-            $adminGroup = Sentry::findGroupByName('Admin');
-            $user->inGroup($adminGroup);
-        } catch (\Cartalyst\Sentry\Groups\GroupNotFoundException $e) {
+        $adminGroup = Sentry::findGroupByName('Admins');
+        if ($user->inGroup($adminGroup)){
+            return $user;
+        } else {
             return trans('admin::login.not_admin');
         }
-        return $user;
     }
 }

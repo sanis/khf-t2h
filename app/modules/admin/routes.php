@@ -7,6 +7,7 @@ Route::group(array('prefix' => 'admin'), function () {
     Route::get('/logout.html', array('uses' => 'App\Modules\Admin\Controllers\LoginController@getLogoutPage', 'as' => 'admin.logout', 'before'=>'admin.loggedIn'));
     Route::get('/remind-password.html', array('uses' => 'App\Modules\Admin\Controllers\LoginController@getRemindPasswordForm', 'as' => 'admin.remind', 'before'=>'admin.loggedOut'));
     Route::post('/remind-password.html', array('uses' => 'App\Modules\Admin\Controllers\LoginController@postRemindPasswordForm', 'as' => 'admin.remind.post', 'before'=>'admin.loggedOut'));
+    Route::get('/remind-password-{id}.html', array('uses' => 'App\Modules\Admin\Controllers\LoginController@getRemindPasswordForm', 'as' => 'admin.remind2', 'before'=>'admin.loggedOut'));
 
     Route::get('/', array('uses' => 'App\Modules\Admin\Controllers\DashboardController@getDashboardPage', 'as' => 'admin.dashboard', 'before' => 'admin.loggedIn|admin.inGroup:Admins'));
 
