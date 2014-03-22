@@ -119,7 +119,7 @@ return array(
 
         'Creolab\LaravelModules\ServiceProvider',
 
-        //'Barryvdh\Debugbar\ServiceProvider',
+        'Barryvdh\Debugbar\ServiceProvider',
 
 	),
 
@@ -194,10 +194,14 @@ return array(
 
         'Sluggable' => 'Cviebrock\EloquentSluggable\Facades\Sluggable',
 
-        'Notification' => 'Krucas\Notification\Facades\Notification'
+        'Notification' => 'Krucas\Notification\Facades\Notification',
 
-        //'Debugbar'        => 'Barryvdh\Debugbar\Facade',
+        'Debugbar'        => 'Barryvdh\Debugbar\Facade',
 
 	),
+
+    // ADDITIONAL CONFIGURATIONS
+
+    'email' => 'info@vukhf.lt',
 
 );

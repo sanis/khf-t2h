@@ -13,7 +13,7 @@
         "cviebrock/eloquent-sluggable": "1.0.*",
         "edvinaskrucas/notification": "2.*",
         "creolab/laravel-modules": "dev-master",
-        //"barryvdh/laravel-debugbar": "1.*",
+        "barryvdh/laravel-debugbar": "dev-master",
 		"davejamesmiller/laravel-breadcrumbs": "~2.2.0"
 	},
 	"autoload": {
@@ -35,7 +35,7 @@
 		"post-update-cmd": [
 			"php artisan clear-compiled",
             "php artisan ide-helper:generate",
-            //"php artisan debugbar:publish",
+            "php artisan debugbar:publish",
 			"php artisan optimize"
 		],
 		"post-create-project-cmd": [
