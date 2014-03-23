@@ -33,6 +33,7 @@ return array(
 		'filters.php',
 		'composers.php',
 		'routes.php',
+        'breadcrumbs.php',
 	),
 
 	/**

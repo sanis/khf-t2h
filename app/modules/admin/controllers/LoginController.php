@@ -55,8 +55,8 @@ class LoginController extends \BaseController
         $remember = (bool)Input::get('remember');
         $user = $this->_loginUser($credentials, $remember);
         if (is_object($user)) {
-            // TODO: this does not echo, but redirects to index. Need to fix this.
-            echo 'LOGGED IN';
+            Notification::success(trans('admin::login.success_login'));
+            return Redirect::route('admin.dashboard');
         } else {
             Notification::danger($user);
             View::share('page_title', trans('admin::login.login_title'));
@@ -161,21 +161,26 @@ class LoginController extends \BaseController
                 return Redirect::route('admin.remind')->withInput();
             }
             if ($user->inGroup($adminGroup)) {
-                $resetCode = $user->getResetPasswordCode();
-                $email = $user->email;
-                $subject = trans('admin::login.password_reset_email_subject');
-                $resetCode = URL::route('admin.remind2', array('resetCode'=>$resetCode));
-                Mail::queue('admin::emails.remind', array('resetLink'=>$resetCode), function($message) use($email, $subject)
-                {
-                    $message->from(Config::get('app.email'))->to($email)->subject($subject);
-                });
-                Notification::success(trans('admin:login.password_reset_send'));
+                $this->_sendPasswordReset($user);
+                Notification::success(trans('admin::login.password_reset_send'));
                 return Redirect::route('admin.login')->withInput();
             } else {
                 Notification::danger(trans('admin::login.only_admins_password'));
                 return Redirect::route('admin.login');
             }
         }
+    }
+
+    private function _sendPasswordReset($user) {
+        $resetCode = $user->getResetPasswordCode();
+        $resetLink = URL::route('admin.remind2', array('resetCode'=>$resetCode));
+        Mail::queue('admin::emails.remind', array('resetLink'=>$resetLink), function($message) use ($user)
+        {
+            $email = $user->email;
+            $subject = trans('admin::login.password_reset_email_subject');
+            $from = Config::get('app.email');
+            $message->from($from)->to($email)->subject($subject);
+        });
     }
 
     /**
@@ -185,6 +190,7 @@ class LoginController extends \BaseController
      * @return \Cartalyst\Sentry\Users\UserInterface|string
      */
     private function _loginUser($credentials, $remember) {
+
         try {
             $user = Sentry::authenticate($credentials, $remember);
         } catch (\Cartalyst\Sentry\Users\LoginRequiredException $e)

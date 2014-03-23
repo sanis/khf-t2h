@@ -13,4 +13,13 @@ $(function() {
             errorElem: '<li></li>'
         }
     });
+    $('.form-control').on('keyup', function(){
+        var $this = $(this);
+        $this.parsley('validate');
+        if ($this.attr('id')=='password_confirmation') {
+            $('#password').parsley('validate');
+        } else if ($this.attr('id')=='password') {
+            $('#password_confirmation').parsley('validate');
+        }
+    });
 });

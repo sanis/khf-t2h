@@ -20,6 +20,7 @@ return array(
     'forgot_pass' => 'Forgot password',
     'reset' => 'Reset',
     'log_in' => 'Log In',
+    'log_out' => 'Log Out',
     'login_title' => 'Log Into the Dashboard',
     'remind_button' => 'Remind via email',
     'back' => 'Back',
@@ -37,7 +38,8 @@ return array(
     'error_reset' => 'There was an error while resetting your password.',
     'only_admins_password' => 'Only admins can reset their passwords here',
     'password_reset_send' => 'Password reset code was send to your email. Check it to reset your password',
-    'password_reset_email_subject' => 'Password reset confirmation'
+    'password_reset_email_subject' => 'Password reset confirmation',
+    'success_login' => 'You have successfully logged in.',
 
 
 );

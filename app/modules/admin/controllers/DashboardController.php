@@ -30,6 +30,7 @@ class DashboardController extends \BaseController
      */
     public function getDashboardPage()
     {
-        return 'ok show dashboard';
+        View::share('page_title', trans('admin::dashboard.page_title'));
+        return View::make('admin::pages.dashboard');
     }
 }

@@ -12,6 +12,9 @@ Route::filter('admin.loggedIn', function()
     if ( ! Sentry::check() ) {
         Notification::danger(trans('admin::user.not_logged_in'));
         return Redirect::route('admin.login');
+    } else {
+        $user = Sentry::getUser();
+        View::share('user',$user);
     }
 });
 
