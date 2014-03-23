@@ -4,16 +4,26 @@ namespace App\Modules\Admin\Controllers;
 
 use View, Input, Config, Sentry, Notification, Redirect, Mail, URL, Validator;
 
+/**
+ * Class AccountController
+ *
+ * @package App\Modules\Admin\Controllers
+ */
 class AccountController extends \BaseController
 {
+    /**
+     * @return \Illuminate\View\View
+     */
     public function getAccountForm() {
-        View::share('page_title', trans('admin::acount.edit_settings'));
-
+        View::share('page_title', trans('admin::account.edit_settings'));
         return View::make('admin::forms.account');
     }
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function postAccountForm() {
-        View::share('page_title', trans('admin::acount.edit_settings'));
+        View::share('page_title', trans('admin::account.edit_settings'));
         $user = View::shared('user');
         $validator = Validator::make(
             Input::all(),
