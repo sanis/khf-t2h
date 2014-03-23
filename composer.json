@@ -11,11 +11,14 @@
         "laravelbook/ardent": "dev-master",
         "barryvdh/laravel-migration-generator": "dev-master",
         "cviebrock/eloquent-sluggable": "1.0.*",
-        //"barryvdh/laravel-debugbar": "1.*",
+        "edvinaskrucas/notification": "2.*",
+        "creolab/laravel-modules": "dev-master",
+        "barryvdh/laravel-debugbar": "dev-master",
 		"davejamesmiller/laravel-breadcrumbs": "~2.2.0"
 	},
 	"autoload": {
 		"classmap": [
+            "app/modules",
 			"app/commands",
 			"app/controllers",
 			"app/models",
@@ -32,7 +35,7 @@
 		"post-update-cmd": [
 			"php artisan clear-compiled",
             "php artisan ide-helper:generate",
-            //"php artisan debugbar:publish",
+            "php artisan debugbar:publish",
 			"php artisan optimize"
 		],
 		"post-create-project-cmd": [
