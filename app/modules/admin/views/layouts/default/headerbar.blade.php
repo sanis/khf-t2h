@@ -46,7 +46,7 @@
             </div>
 
             <div class="col-xs-6 col-sm-2">
-                <a href="#" class="shortcut-tiles tiles-midnightblue">
+                <a href="{{ URL::route('admin.account') }}" class="shortcut-tiles tiles-midnightblue">
                     <div class="tiles-body">
                         <div class="pull-left"><i class="fa fa-cog"></i></div>
                     </div>

@@ -12,3 +12,7 @@ Breadcrumbs::register('admin.account.post', function($breadcrumbs) {
     $breadcrumbs->parent('admin.account');
     $breadcrumbs->push('Save account settings', route('admin.account'));
 });
+
+Breadcrumbs::register('admin.user.list', function($breadcrumbs) {
+    $breadcrumbs->push('View users list', route('admin.user.list'));
+});

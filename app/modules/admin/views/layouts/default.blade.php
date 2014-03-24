@@ -24,6 +24,7 @@
 
     <link rel='stylesheet' type='text/css' href='{{ asset($assetDir.'plugins/codeprettifier/prettify.css') }}' />
     <link rel='stylesheet' type='text/css' href='{{ asset($assetDir.'plugins/form-toggle/toggles.css') }}' />
+    <link rel="stylesheet" type="text/css" href="{{ asset($assetDir.'plugins/datatables/dataTables.css') }}">
 
     <!-- <script type="text/javascript" src="assets/js/less.js"></script> -->
 </head>
@@ -74,6 +75,9 @@
 <script type='text/javascript' src='{{ asset($assetDir.'plugins/easypiechart/jquery.easypiechart.min.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'plugins/sparklines/jquery.sparklines.min.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'plugins/form-toggle/toggle.min.js') }}'></script>
+<script type='text/javascript' src='{{ asset($assetDir.'plugins/datatables/jquery.dataTables.min.js') }}'></script>
+<script type='text/javascript' src='{{ asset($assetDir.'plugins/datatables/dataTables.bootstrap.js') }}'></script>
+<script type='text/javascript' src='{{ asset($assetDir.'demo/demo-datatables.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'plugins/form-parsley/parsley.min.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'demo/demo-formvalidation.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'js/placeholdr.js') }}'></script>
