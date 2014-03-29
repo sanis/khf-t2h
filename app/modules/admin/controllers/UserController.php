@@ -25,7 +25,7 @@ class UserController extends \BaseController
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function getDeleteUser($userId) {
+    public function getUserDelete($userId) {
         if ((int)$userId!=1) {
             try {
                 $user = Sentry::findUserById($userId);
@@ -47,7 +47,7 @@ class UserController extends \BaseController
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function getActivateUser($userId) {
+    public function getUserActivate($userId) {
         if ((int)$userId!=1) {
             try {
                 $user = Sentry::findUserById($userId);
@@ -75,7 +75,7 @@ class UserController extends \BaseController
      *
      * @return \Illuminate\Http\RedirectResponse|string
      */
-    public function getEditUserForm($userId) {
+    public function getUserEditForm($userId) {
         if ((int)$userId!=1) {
             try {
                 $user = Sentry::findUserById($userId);
