@@ -7,7 +7,7 @@
     <h1>Users control</h1>
     <div class="options">
         <div class="btn-toolbar">
-            <a href="#" class="btn btn-success"><i class="fa fa-plus"></i> Add new</a>
+            <a href="{{ URL::route('admin.user.add') }}" class="btn btn-success"><i class="fa fa-plus"></i> Add new</a>
         </div>
     </div>
 </div>
@@ -40,7 +40,11 @@
     <td>{{{ $user1->email }}}</td>
     <td>{{{ $user1->first_name }}}</td>
     <td>{{{ $user1->last_name }}}</td>
-    <td>{{{ 'GROUPS' }}}</td>
+    <td>
+        @foreach ($user1->groups as $group)
+            {{{ $group->name }}},
+        @endforeach
+    </td>
     <td class="center">
         @if ($user1->id == '1')
         SUPERUSER!!!

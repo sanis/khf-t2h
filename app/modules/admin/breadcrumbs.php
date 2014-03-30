@@ -17,6 +17,21 @@ Breadcrumbs::register('admin.user.list', function($breadcrumbs) {
     $breadcrumbs->push('View users list', route('admin.user.list'));
 });
 
+Breadcrumbs::register('admin.user.add', function($breadcrumbs) {
+    $breadcrumbs->parent('admin.user.list');
+    $breadcrumbs->push('Add new user', route('admin.user.add'));
+});
+
+Breadcrumbs::register('admin.user.edit', function($breadcrumbs) {
+    $breadcrumbs->parent('admin.user.list');
+    $breadcrumbs->push('Edit user', route('admin.user.edit'));
+});
+
+Breadcrumbs::register('admin.user.edit.post', function($breadcrumbs) {
+    $breadcrumbs->parent('admin.user.list');
+    $breadcrumbs->push('Edit user', route('admin.user.edit.post'));
+});
+
 Breadcrumbs::register('admin.group.list', function($breadcrumbs) {
     $breadcrumbs->push('View groups list', route('admin.group.list'));
 });

@@ -64,6 +64,23 @@ Route::group(array('prefix' => 'admin'), function () {
             'before'=>'admin.loggedIn|admin.inGroup:Admins'
         )
     );
+
+    Route::get('/users-add.html',
+        array(
+            'uses' => 'App\Modules\Admin\Controllers\UserController@getUserAddForm',
+            'as' => 'admin.user.add',
+            'before'=>'admin.loggedIn|admin.inGroup:Admins'
+        )
+    );
+
+    Route::post('/users-add.html',
+        array(
+            'uses' => 'App\Modules\Admin\Controllers\UserController@postUserAddForm',
+            'as' => 'admin.user.add.post',
+            'before'=>'admin.loggedIn|admin.inGroup:Admins'
+        )
+    );
+
     Route::get('/users-delete-{id}.html',
         array(
             'uses' => 'App\Modules\Admin\Controllers\UserController@getUserDelete',
@@ -94,7 +111,7 @@ Route::group(array('prefix' => 'admin'), function () {
     );
     Route::post('/users-edit-{id}.html',
         array(
-            'uses' => 'App\Modules\Admin\Controllers\UserController@getUserEditForm',
+            'uses' => 'App\Modules\Admin\Controllers\UserController@postUserEditForm',
             'as' => 'admin.user.edit.post',
             'before'=>'admin.loggedIn|admin.inGroup:Admins'
         )

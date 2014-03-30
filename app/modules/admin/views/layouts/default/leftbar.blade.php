@@ -48,7 +48,7 @@
     <li><a href="javascript:;"><i class="fa fa-user"></i> <span>Users & Groups</span></a>
         <ul class="acc-menu">
             <li><a href="{{ URL::route('admin.user.list') }}">List users</a></li>
-            <li><a href="/news.html">Create new user</a></li>
+            <li><a href="{{ URL::route('admin.user.add') }}">Create new user</a></li>
             <li class="divider" style="margin: 0px 0px;"></li>
             <li><a href="{{ URL::route('admin.group.list') }}">List groups</a></li>
             <li><a href="{{ URL::route('admin.group.add') }}">Create new group</a></li>
