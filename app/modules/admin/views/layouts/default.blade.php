@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="utf-8">
     <title>{{{ $page_title }}}</title>
@@ -24,13 +23,11 @@
 
     <link rel='stylesheet' type='text/css' href='{{ asset($assetDir.'plugins/codeprettifier/prettify.css') }}' />
     <link rel='stylesheet' type='text/css' href='{{ asset($assetDir.'plugins/form-toggle/toggles.css') }}' />
-    <link rel="stylesheet" type="text/css" href="{{ asset($assetDir.'plugins/datatables/dataTables.css') }}">
+    <link rel="stylesheet" type="text/css" href='{{ asset($assetDir.'plugins/datatables/dataTables.css') }}' />
+    <link rel='stylesheet' type='text/css' href='{{ asset($assetDir.'plugins/form-nestable/jquery.nestable.css') }}' />
 
     <!-- <script type="text/javascript" src="assets/js/less.js"></script> -->
 </head>
-
-<body class=" ">
-
 
 @include('admin::layouts.default.headerbar')
 
@@ -74,6 +71,9 @@
 <script type='text/javascript' src='{{ asset($assetDir.'plugins/codeprettifier/prettify.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'plugins/easypiechart/jquery.easypiechart.min.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'plugins/sparklines/jquery.sparklines.min.js') }}'></script>
+<script type='text/javascript' src='{{ asset($assetDir.'plugins/form-nestable/jquery.nestable.min.js') }}'></script>
+<script type='text/javascript' src='{{ asset($assetDir.'plugins/form-nestable/app.min.js') }}'></script>
+<script type='text/javascript' src='{{ asset($assetDir.'demo/demo-nestable.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'plugins/form-toggle/toggle.min.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'plugins/datatables/jquery.dataTables.min.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'plugins/datatables/dataTables.bootstrap.js') }}'></script>
@@ -83,7 +83,3 @@
 <script type='text/javascript' src='{{ asset($assetDir.'js/placeholdr.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'js/application.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'demo/demo.js') }}'></script>
-
-</body>
-
-</html>

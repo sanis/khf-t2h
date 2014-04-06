@@ -8,7 +8,7 @@
             <li><a href="/news.html">List news</a></li>
             <li><a href="/news.html">Create news</a></li>
             <li class="divider" style="margin: 0px 0px;"></li>
-            <li><a href="/news.html">List categories</a></li>
+            <li><a href="{{ URL::route('admin.newsCategory.list') }}">List categories</a></li>
             <li><a href="/news.html">Create category</a></li>
         </ul>
     </li>
