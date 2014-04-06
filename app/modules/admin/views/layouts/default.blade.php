@@ -9,7 +9,7 @@
 
     <!-- <link href="assets/less/styles.less" rel="stylesheet/less" media="all">  -->
     <link rel="stylesheet" href="{{ asset($assetDir.'css/styles.min.css') }}">
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <link href='{{ asset($assetDir.'demo/variations/sidebar-green.css') }}' rel='stylesheet' type='text/css' media='all' id='styleswitcher'>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries. Placeholdr.js enables the placeholder attribute -->
