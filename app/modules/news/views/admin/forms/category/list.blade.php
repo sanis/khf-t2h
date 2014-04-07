@@ -14,7 +14,7 @@
                 <div class="panel-heading"><h4>{{ trans('admin::group.add_group') }}</h4></div>
                 <div class="panel-body">
                     {{ Form::open(array('route' => 'admin.newsCategory.list.post', 'class'=>'form-horizontal row-border','data-validate'=>'parsley', 'id'=>'validate-form')) }}
-                    <textarea name="nestable_list" id="nestable_list_1_output" style="width:100%;display: none;" rows="3" class="form-group">
+                    <textarea name="nestable_list" id="nestable_list_1_output" style="width:100%;display:none;" rows="3" class="form-group">
                     </textarea>
                     <div class="dd" id="nestable_list_1">
                        {{ $categories }}

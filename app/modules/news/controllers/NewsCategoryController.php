@@ -11,21 +11,71 @@ use View, Input, Config, Sentry, Notification, Redirect, Mail, URL, Validator, N
  */
 class NewsCategoryController extends \BaseController
 {
+
+    public function getNewsCategoryEditForm($categoryId) {
+        $category = NewsCategory::findOrFail($categoryId);
+        View::share('page_title', 'Edit news category');
+        View::share('category_info', $category);
+        return View::make('news::admin.forms.category.edit');
+    }
+
+    public function postNewsCategoryEditForm($categoryId) {
+
+    }
+
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postNewsCategoryAddForm()
+    {
+        $validator = Validator::make(Input::all(), array(
+                'title'=>'required',
+                'parentId'=>'integer|exists:news_categories,id'
+            )
+        );
+
+        if ($validator->fails()) {
+            Notification::danger($validator->messages()->all());
+            return Redirect::route('admin.newsCategory.add')->withInput();
+        } else {
+            $category = NewsCategory::create(array(
+                'title'=>Input::get('title')
+            ));
+
+            if (!empty(Input::get('parentId'))) {
+                $mainCategory = NewsCategory::find(Input::get('parentId'));
+                $category->makeChildOf($mainCategory);
+            }
+
+            Notification::success('Successfully added category.');
+            return Redirect::route('admin.newsCategory.list');
+        }
+    }
+
     /**
      * @return \Illuminate\View\View
      */
-    public function getNewsCategoryList() {
+    public function getNewsCategoryAddForm()
+    {
         View::share('page_title', 'blah blah');
-        $roots = NewsCategory::roots()->get();
-        $categories = array();
-        foreach ($roots as $root) {
-            $categories = array_merge(NewsCategory::findOrFail($root->id)->getDescendantsAndSelf()->toHierarchy()->toArray(),$categories);
-        }
-        //dd($categories);
+        $categories = NewsCategory::getNestedList('title', 'id', '-');
+        View::share('categories', $categories);
+        return View::make('news::admin.forms.category.add');
+    }
+
+    /**
+     * @return \Illuminate\View\View
+     */
+    public function getNewsCategoryList()
+    {
+        View::share('page_title', 'blah blah');
+        $categories = NewsCategory::all()->toHierarchy()->toArray();
         $categories = $this->_MakeTree($categories);
-        View::share('categories',$categories);
+        View::share('categories', $categories);
         return View::make('news::admin.forms.category.list');
     }
+
+    //TODO: move to model. No such a big logic in controller.
 
     /**
      * @return \Illuminate\Http\RedirectResponse
@@ -54,17 +104,16 @@ class NewsCategoryController extends \BaseController
                         $root->makeRoot();
                         $orderId++;
                     }
-                    if ($oldRoot != NULL) $root->moveToLeftOf($oldRoot);
+                    if ($oldRoot != NULL) $root->makeSiblingOf($oldRoot);
                     if (isset($category->children)) {
                         $this->_putIntoChilds($root, $category->children);
                     }
                 }
+                Notification::success('Updated category tree.');
                 return Redirect::route('admin.newsCategory.list');
             }
         }
     }
-
-    //TODO: move to model. No such a big logic in controller.
 
     /**
      * Puts into child of root
@@ -80,9 +129,7 @@ class NewsCategoryController extends \BaseController
                 $this->_putIntoChilds($childrenCategory,$children->children);
             }
         }
-    }
-
-    /**
+    }    /**
      * Makes a category tree
      *
      * @param $categories
