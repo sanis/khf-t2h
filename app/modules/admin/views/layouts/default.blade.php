@@ -71,6 +71,7 @@
 <script type='text/javascript' src='{{ asset($assetDir.'plugins/codeprettifier/prettify.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'plugins/easypiechart/jquery.easypiechart.min.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'plugins/sparklines/jquery.sparklines.min.js') }}'></script>
+<script type='text/javascript' src='{{ asset($assetDir.'plugins/form-ckeditor/ckeditor.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'plugins/form-nestable/jquery.nestable.min.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'plugins/form-nestable/app.min.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'demo/demo-nestable.js') }}'></script>
