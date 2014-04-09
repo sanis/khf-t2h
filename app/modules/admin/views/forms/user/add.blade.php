@@ -81,7 +81,7 @@
                         <div class="col-sm-6 col-sm-offset-3">
                             <div class="btn-toolbar">
                                 {{ Form::button(trans('admin::user.create'), array('class'=>'btn btn-primary', 'form'=>'validate-form', 'type'=>'submit', 'onclick'=>'javascript:$(\'#validate-form\').parsley( \'validate\' );')) }}
-                                <a href="{{ URL::route('admin.account') }}" class="btn btn-default">{{ trans('admin::login.reset') }}</a>
+                                <a href="{{ URL::route('admin.user.add') }}" class="btn btn-default">{{ trans('admin::login.reset') }}</a>
                             </div>
                         </div>
                     </div>

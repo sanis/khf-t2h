@@ -15,7 +15,7 @@ class GroupController extends \BaseController
      */
     public function getGroupList()
     {
-        View::share('page_title', 'blah blah');
+        View::share('page_title', trans('admin::group.list_title'));
         $groups = Sentry::findAllGroups();
         View::share('groups', $groups);
         return View::make('admin::pages.group.list');
@@ -32,14 +32,14 @@ class GroupController extends \BaseController
             try {
                 $group = Sentry::findGroupById($groupId);
             } catch (\Cartalyst\Sentry\Users\GroupNotFoundException $e) {
-                Notification::danger('Group not found');
+                Notification::danger(trans('admin::group.not_found'));
                 return Redirect::route('admin.group.list');
             }
             $group->delete();
-            Notification::info(trans('admin::group.sucessfully deleted.'));
+            Notification::info(trans('admin::group.deleted'));
             return Redirect::route('admin.group.list');
         } else {
-            Notification::danger('Can\'t delete main user group sorry');
+            Notification::danger(trans('admin.gooup.not_delete_main'));
             return Redirect::route('admin.group.list');
         }
     }
@@ -56,7 +56,7 @@ class GroupController extends \BaseController
         try {
             $group = Sentry::findGroupById($groupId);
         } catch (\Cartalyst\Sentry\Users\GroupNotFoundException $e) {
-            Notification::danger('Group not found');
+            Notification::danger(trans('admin::group.not_found'));
             return Redirect::route('admin.group.list');
         }
         View::share('group', $group);
@@ -84,7 +84,7 @@ class GroupController extends \BaseController
             try {
                 $group = Sentry::findGroupById($groupId);
             } catch (\Cartalyst\Sentry\Users\GroupNotFoundException $e) {
-                Notification::danger('Group not found');
+                Notification::danger(trans('admin::group.not_found'));
                 return Redirect::route('admin.group.list');
             }
             if (count(Input::get('permissions')) > 0) {
@@ -142,14 +142,14 @@ class GroupController extends \BaseController
 
             Sentry::getGroupProvider()->create($groupInfo);
 
-            Notification::success(trans('admin::group.successfully_added'));
+            Notification::success(trans('admin::group.added'));
             return Redirect::route('admin.group.list');
         }
     }
 
     public function getGroupAddForm()
     {
-        View::share('page_title', 'blah blah');
+        View::share('page_title', trans('admin::group.add_title'));
         $groups = Sentry::findAllGroups();
         View::share('groups', $groups);
         return View::make('admin::forms.group.add');
