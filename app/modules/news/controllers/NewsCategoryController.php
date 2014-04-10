@@ -15,7 +15,7 @@ class NewsCategoryController extends \BaseController
     public function getNewsCategoryEditForm($categoryId)
     {
         $category = NewsCategory::findOrFail($categoryId);
-        View::share('page_title', 'Edit news category');
+        View::share('page_title', trans('news::newsCategory.edit_title'));
         View::share('category_info', $category);
         $categories = NewsCategory::getNestedList('title', 'id', '-');
         View::share('categories', $categories);
@@ -48,7 +48,7 @@ class NewsCategoryController extends \BaseController
                 $category->makeRoot();
             }
 
-            Notification::success('Successfully saved category.');
+            Notification::success(trans('news::newsCategory.saved'));
             return Redirect::route('admin.newsCategory.list');
         }
     }
@@ -59,7 +59,7 @@ class NewsCategoryController extends \BaseController
         if ($category) {
             $category->delete();
         }
-        Notification::info('Deleted category and deleted all descendants of it.');
+        Notification::info(trans('news::newsCategory.deleted'));
         return Redirect::route('admin.newsCategory.list');
     }
 
@@ -87,7 +87,7 @@ class NewsCategoryController extends \BaseController
                 $category->makeChildOf($mainCategory);
             }
 
-            Notification::success('Successfully added category.');
+            Notification::success(trans('news::newsCategory.added'));
             return Redirect::route('admin.newsCategory.list');
         }
     }
@@ -97,7 +97,7 @@ class NewsCategoryController extends \BaseController
      */
     public function getNewsCategoryAddForm()
     {
-        View::share('page_title', 'blah blah');
+        View::share('page_title', trans('news::newsCategory.add_title'));
         $categories = NewsCategory::getNestedList('title', 'id', '-');
         View::share('categories', $categories);
         return View::make('news::admin.forms.category.add');
@@ -108,7 +108,7 @@ class NewsCategoryController extends \BaseController
      */
     public function getNewsCategoryList()
     {
-        View::share('page_title', 'blah blah');
+        View::share('page_title', trans('news::newsCategory.list_title'));
         $categories = NewsCategory::all()->toHierarchy()->toArray();
         $categories = $this->_MakeTree($categories);
         View::share('categories', $categories);
@@ -133,8 +133,8 @@ class NewsCategoryController extends \BaseController
                             <div class=\"dd-handle dd3-handle\"></div>
                             <div class=\"dd3-content\">
                             {$category['title']} <span class=\"pull-right\" style=\"margin-top: -2px;\">
-                            <a href=\"" . URL::route('admin.newsCategory.edit', array($category['id'])) . "\" class=\"btn btn-info btn-xs\">Edit</a>
-                            <a href=\"" . URL::route('admin.newsCategory.delete', array($category['id'])) . "\" class=\"btn btn-danger btn-xs\">Delete</a>
+                            <a href=\"" . URL::route('admin.newsCategory.edit', array($category['id'])) . "\" class=\"btn btn-info btn-xs\">".trans('news::newsCategory.edit')."</a>
+                            <a href=\"" . URL::route('admin.newsCategory.delete', array($category['id'])) . "\" class=\"btn btn-danger btn-xs\">".trans('news::newsCategory.delete')."</a>
                        </span></div>";
             if (isset($category['children']) && count($category['children']) > 0) {
                 $return .= $this->_MakeTree($category['children']);
@@ -157,10 +157,9 @@ class NewsCategoryController extends \BaseController
             Notification::danger($validator->messages()->all());
             return Redirect::route('admin.newsCategory.list');
         } else {
-            View::share('page_title', 'blah blah');
             $categories = json_decode(Input::get('nestable_list'));
             if ($categories == NULL || $categories === FALSE) {
-                Notification::danger('Sorry can\'t parse your list.');
+                Notification::danger(trans('news::newsCategory.cant_parse'));
                 return Redirect::route('admin.newsCategory.list');
             } else {
                 $root = null;
@@ -177,7 +176,7 @@ class NewsCategoryController extends \BaseController
                         $this->_putIntoChilds($root, $category->children);
                     }
                 }
-                Notification::success('Updated category tree.');
+                Notification::success(trans('news::newsCategory.tree_updated'));
                 return Redirect::route('admin.newsCategory.list');
             }
         }

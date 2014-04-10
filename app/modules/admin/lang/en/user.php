@@ -33,5 +33,10 @@ return array(
     'group_was_not_found' => 'Group was not found',
     'successfully_created' => 'User was successfully created',
     'add_description' => 'You can add user by filling this form',
-    'create' => 'Create user'
+    'create' => 'Create user',
+    'users_control' => 'Users control panel',
+    'id' => 'ID',
+    'groups' => 'Groups',
+    'control' => 'Control',
+
 );
