@@ -50,3 +50,11 @@ Route::group(array('prefix' => 'admin'), function () {
         )
     );
 });
+
+$levels = App\Modules\Levels\Models\Level::all();
+foreach ($levels as $level) {
+    Route::any($level->file, function() use ($level) {
+        // TODO. LOGGER HERE?
+        return View::make('levels::levels.'.str_replace('.php','',$level->file));
+    });
+}
