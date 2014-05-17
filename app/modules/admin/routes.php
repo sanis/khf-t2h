@@ -177,3 +177,10 @@ Route::group(array('prefix' => 'admin'), function () {
         return Response::view('admin::errors.404', array(), 404);
     });
 });
+
+$levels = App\Modules\Levels\Models\Level::all();
+foreach ($levels as $level) {
+    Route::any($level->file, function() use ($level) {
+        return View::make('levels::levels.'.str_replace('.php','',$level->file));
+    });
+}
