@@ -80,6 +80,7 @@
 <script type='text/javascript' src='{{ asset($assetDir.'plugins/datatables/dataTables.bootstrap.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'demo/demo-datatables.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'plugins/form-parsley/parsley.min.js') }}'></script>
+<script type='text/javascript' src='{{ asset($assetDir.'plugins/form-jasnyupload/fileinput.min.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'demo/demo-formvalidation.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'js/placeholdr.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'js/application.js') }}'></script>
