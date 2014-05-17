@@ -45,7 +45,7 @@
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-3">
                             <div class="btn-toolbar">
-                                {{ Form::button(trans('admin::group.edit'), array('class'=>'btn btn-primary', 'form'=>'validate-form', 'type'=>'submit', 'onclick'=>'javascript:$(\'#validate-form\').parsley( \'validate\' );')) }}
+                                {{ Form::button(trans('admin::group.save'), array('class'=>'btn btn-primary', 'form'=>'validate-form', 'type'=>'submit', 'onclick'=>'javascript:$(\'#validate-form\').parsley( \'validate\' );')) }}
                                 <a href="{{ URL::route('admin.group.add') }}" class="btn btn-default">{{ trans('admin::login.reset') }}</a>
                             </div>
                         </div>

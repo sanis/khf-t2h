@@ -4,10 +4,10 @@
 
 <div id="page-heading">
     {{ Breadcrumbs::render(Route::current()->getName()) }}
-    <h1>Users control</h1>
+    <h1>{{ trans('admin::user.users_control') }}</h1>
     <div class="options">
         <div class="btn-toolbar">
-            <a href="{{ URL::route('admin.user.add') }}" class="btn btn-success"><i class="fa fa-plus"></i> Add new</a>
+            <a href="{{ URL::route('admin.user.add') }}" class="btn btn-success"><i class="fa fa-plus"></i> {{ trans('admin::user.add_title') }}</a>
         </div>
     </div>
 </div>
@@ -19,18 +19,18 @@
 <div class="col-md-12">
 <div class="panel panel-sky">
 <div class="panel-heading">
-    <h4>System users</h4>
+    <h4>{{ trans('admin::user.user_list') }}</h4>
 </div>
 <div class="panel-body collapse in">
 <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
 <thead>
 <tr>
-    <th style="width:70px;">ID</th>
-    <th>Email</th>
-    <th>First name</th>
-    <th>Last name</th>
-    <th>Groups</th>
-    <th>Control</th>
+    <th style="width:70px;">{{ trans('admin::user.id') }}</th>
+    <th>{{ trans('admin::user.email') }}</th>
+    <th>{{ trans('admin::user.first_name') }}</th>
+    <th>{{ trans('admin::user.last_name') }}</th>
+    <th>{{ trans('admin::user.groups') }}</th>
+    <th>{{ trans('admin::user.control') }}</th>
 </tr>
 </thead>
 <tbody>

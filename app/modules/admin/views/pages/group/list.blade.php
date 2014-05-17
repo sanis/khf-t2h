@@ -4,10 +4,10 @@
 
 <div id="page-heading">
     {{ Breadcrumbs::render(Route::current()->getName()) }}
-    <h1>Groups control</h1>
+    <h1>{{ trans('admin::group.groups_control') }}</h1>
     <div class="options">
         <div class="btn-toolbar">
-            <a href="{{ URL::route('admin.group.add') }}" class="btn btn-success"><i class="fa fa-plus"></i> Add new</a>
+            <a href="{{ URL::route('admin.group.add') }}" class="btn btn-success"><i class="fa fa-plus"></i> {{ trans('admin::group.add_group') }}</a>
         </div>
     </div>
 </div>
@@ -19,16 +19,16 @@
         <div class="col-md-12">
             <div class="panel panel-sky">
                 <div class="panel-heading">
-                    <h4>System users</h4>
+                    <h4>{{ trans('admin::group.list_title') }}</h4>
                 </div>
                 <div class="panel-body collapse in">
                     <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
                         <thead>
                         <tr>
-                            <th style="width:70px;">ID</th>
-                            <th>Name</th>
-                            <th>Permissions</th>
-                            <th>Control</th>
+                            <th style="width:70px;">{{ trans('admin::group.id') }}</th>
+                            <th>{{ trans('admin::group.name') }}</th>
+                            <th>{{ trans('admin::group.permissions') }}</th>
+                            <th>{{ trans('admin::group.control') }}</th>
                         </tr>
                         </thead>
                         <tbody>

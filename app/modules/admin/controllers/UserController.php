@@ -16,7 +16,7 @@ class UserController extends \BaseController
      */
     public function getUserList()
     {
-        View::share('page_title', 'blah blah');
+        View::share('page_title', trans('admin::user.user_list'));
         $users = Sentry::findAllUsers();
         View::share('users', $users);
         return View::make('admin::pages.user.list');
@@ -33,14 +33,14 @@ class UserController extends \BaseController
             try {
                 $user = Sentry::findUserById($userId);
             } catch (\Cartalyst\Sentry\Users\UserNotFoundException $e) {
-                Notification::danger('User not found');
+                Notification::danger(trans('admin::user.user_not_found'));
                 return Redirect::route('admin.user.list');
             }
-            //$user->delete();
-            Notification::info('User deleted');
+            $user->delete();
+            Notification::info(trans('admin::user.user_deleted'));
             return Redirect::route('admin.user.list');
         } else {
-            Notification::danger('Can\'t delete main user sorry');
+            Notification::danger(trans('admin::user.user_not_delete_main'));
             return Redirect::route('admin.user.list');
         }
     }
@@ -56,20 +56,20 @@ class UserController extends \BaseController
             try {
                 $user = Sentry::findUserById($userId);
             } catch (\Cartalyst\Sentry\Users\UserNotFoundException $e) {
-                Notification::danger('User not found');
+                Notification::danger(trans('admin::user.user_not_found'));
                 return Redirect::route('admin.user.list');
             }
             if (!$user->isActivated()) {
                 $user->activate();
-                Notification::info('User activated');
+                Notification::info(trans('admin::user.user_activated'));
                 return Redirect::route('admin.user.list');
             } else {
                 $user->deactivate();
-                Notification::info('User deactivated');
+                Notification::info(trans('admin::user.user_deactivated'));
                 return Redirect::route('admin.user.list');
             }
         } else {
-            Notification::danger('Can\'t activate/deactivate main user sorry');
+            Notification::danger(trans('admin::user.user_not_deactivate_main'));
             return Redirect::route('admin.user.list');
         }
     }
@@ -81,14 +81,15 @@ class UserController extends \BaseController
      */
     public function getUserEditForm($userId)
     {
-        View::share('page_title', 'blah blah');
+        View::share('page_title', trans('admin::user.edit'));
         if ((int)$userId != 1) {
             try {
                 $user = Sentry::findUserById($userId);
             } catch (\Cartalyst\Sentry\Users\UserNotFoundException $e) {
-                Notification::danger('User not found');
+                Notification::danger(trans('admin::user.user_not_found'));
                 return Redirect::route('admin.user.list');
             }
+            // TODO: optimize this with left join?
             $groups = $user->getGroups();
             foreach ($groups as $group) {
                 $userGroups[] = $group->name;
@@ -99,7 +100,7 @@ class UserController extends \BaseController
             View::share('userEditable', $user);
             return View::make('admin::forms.user.edit');
         } else {
-            Notification::danger('Main user is not editable');
+            Notification::danger(trans('admin::user.user_not_edit_main'));
             return Redirect::route('admin.user.list');
         }
     }
@@ -125,7 +126,7 @@ class UserController extends \BaseController
                 try {
                     $user = Sentry::findUserById($userId);
                 } catch (\Cartalyst\Sentry\Users\UserNotFoundException $e) {
-                    Notification::danger('User not found');
+                    Notification::danger(trans('admin::user.user_not_found'));
                     return Redirect::route('admin.user.list');
                 }
 
@@ -168,14 +169,14 @@ class UserController extends \BaseController
                 return Redirect::route('admin.user.edit', array($userId));
             }
         } else {
-            Notification::danger('Main user is not editable');
+            Notification::danger(trans('admin::user.user_not_edit_main'));
             return Redirect::route('admin.user.list');
         }
     }
 
     public function getUserAddForm()
     {
-        View::share('page_title', 'blah blah');
+        View::share('page_title', trans('admin::user.add_title'));
 
         $groups = Sentry::findAllGroups();
         View::share('groups', $groups);
@@ -222,10 +223,10 @@ class UserController extends \BaseController
                 Notification::danger(trans('admin::user.password_field_required'));
                 return Redirect::route('admin.user.add')->withInput()->exceptInput(array('password', 'password_confirmed'));
             } catch (\Cartalyst\Sentry\Users\UserExistsException $e) {
-                Notification::danger(trans('admin::user.already_esists'));
+                Notification::danger(trans('admin::user.already_exists'));
                 return Redirect::route('admin.user.add')->withInput()->exceptInput(array('password', 'password_confirmed'));
             } catch (\Cartalyst\Sentry\Groups\GroupNotFoundException $e) {
-                Notification::danger(trans('admin::user.group_not_found'));
+                Notification::danger(trans('admin::user.group_was_not_found'));
                 return Redirect::route('admin.user.add')->withInput()->exceptInput(array('password', 'password_confirmed'));
             }
             Notification::success(trans('admin::user.successfully_created'));

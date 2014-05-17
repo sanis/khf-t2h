@@ -13,7 +13,7 @@
             <div class="panel panel-midnightblue">
                 <div class="panel-heading"><h4>{{ trans('admin::user.edit') }}</h4></div>
                 <div class="panel-body">
-                    <p>{{ trans('admin::user.edit.description') }}</p>
+                    <p>{{ trans('admin::user.edit_description') }}</p>
                     {{ Form::open(array('route' => array('admin.user.edit', $userEditable->id), 'class'=>'form-horizontal row-border','data-validate'=>'parsley', 'id'=>'validate-form')) }}
 
                     <div class="form-group">
@@ -33,20 +33,20 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="last_name">{{ trans('admin::user.last_name') }}</label>
                         <div class="col-sm-6">
-                            {{ Form::text('last_name', $userEditable->last_name, array('class'=>'form-control', 'placeholder'=>trans('admin::account.last_name'), 'id'=>'last_name', 'data-minlength'=>'3', 'required'=>'required')) }}
+                            {{ Form::text('last_name', $userEditable->last_name, array('class'=>'form-control', 'placeholder'=>trans('admin::user.last_name'), 'id'=>'last_name', 'data-minlength'=>'3', 'required'=>'required')) }}
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="password">{{ trans('admin::user.password') }}</label>
                         <div class="col-sm-6">
-                            {{ Form::password('password', array('class'=>'form-control', 'placeholder'=>trans('admin::login.password'), 'id'=>'password','data-equalto'=>'#password_confirmation')) }}
+                            {{ Form::password('password', array('class'=>'form-control', 'placeholder'=>trans('admin::user.password'), 'id'=>'password','data-equalto'=>'#password_confirmation')) }}
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">{{ trans('admin::user.password_confirmation') }}</label>
                         <div class="col-sm-6">
-                            {{ Form::password('password_confirmation', array('class'=>'form-control', 'placeholder'=>trans('admin::login.password_confirmation'), 'id'=>'password_confirmation', 'data-equalto'=>'#password')) }}
+                            {{ Form::password('password_confirmation', array('class'=>'form-control', 'placeholder'=>trans('admin::user.password_confirmation'), 'id'=>'password_confirmation', 'data-equalto'=>'#password')) }}
                         </div>
                     </div>
 
@@ -68,7 +68,7 @@
                         <div class="col-sm-6">
                             <div class="checkbox">
                                 <label>
-                                    {{ Form::checkbox('activated', '1', (bool)$userEditable->activated); }} {{{ trans('admin::user.activated') }}}
+                                    {{ Form::checkbox('activated', '1', (bool)$userEditable->activated); }} {{{ trans('admin::user.yes') }}}
                                 </label>
                             </div>
                         </div>
