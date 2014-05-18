@@ -56,6 +56,7 @@ foreach ($levels as $level) {
             App\Modules\Logs\Models\Log::addToLog($level->id, Sentry::getUser());
         }
         View::share('log_file','ajax-'.$level->file);
+        View::share('level',$level);
         return View::make('levels::levels.'.str_replace('.php','',$level->file));
     });
 

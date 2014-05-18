@@ -12,6 +12,9 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+	<!-- Add fancyBox main JS and CSS files -->
+	<script type="text/javascript" src="<?php echo asset(str_replace('dist/','',$frontAssetDir.'source/jquery.fancybox.js')) ?>"></script>
+	<link rel="stylesheet" type="text/css" href="<?php echo asset(str_replace('dist/','',$frontAssetDir.'source/jquery.fancybox.css')) ?>" media="screen" />
 </head>
 <body>
 <!-- Login bar start -->
@@ -26,7 +29,13 @@
             <a class="navbar-brand" href="#">Try2Hack</a>
         </div>
         <center>
-            <div class="navbar-collapse collapse" id="navbar-main">
+            <div class="navbar-collapse collapse" id="navbar-main"> 
+		<ul class="nav navbar-nav">
+		<?php foreach ($level->suggestions as $suggestion) { ?>
+                    <li><a class="fancybox" href="#suggestion<?php echo $suggestion->id; ?>"><?php echo $suggestion->title; ?></a>
+                    </li>
+		<?php } ?>
+                </ul>
         <?php if (!Sentry::check()) { ?>
 
 
@@ -75,6 +84,15 @@
     </div>
 </div>
 
+<?php foreach ($level->suggestions as $suggestion) { ?>
+<div id="suggestion<?php echo $suggestion->id; ?>" style="width:100%;display: none;">
+<h3><?php echo $suggestion->title; ?></h3>
+<p>
+<?php echo nl2br($suggestion->text); ?>
+</p>
+</div>
+<?php } ?>
+
 <?php if (Sentry::check()) { ?>
 <script type="text/javascript">
     $( "#login-form" ).submit(function( event ) {
@@ -87,5 +105,10 @@
 </script>
 <?php } ?>
 <script type="text/javascript" src="data:text/javascript;base64,ICQoICIjbG9naW4tZm9ybSIgKS5zdWJtaXQoZnVuY3Rpb24oIGV2ZW50ICkgew0KICAgICAgICB2YXIgbG9naW4gPSAkKCIjbG9naW4iKTsNCiAgICAgICAgdmFyIHBhc3N3b3JkID0gJCgiI3Bhc3N3b3JkIik7DQogICAgICAgIGlmICgobG9naW4udmFsKCk9PSdoYWNrZXInKSAmJiAocGFzc3dvcmQudmFsKCk9PSd2dWtoZicpKSB7DQogICAgICAgICAgICBpZihjb25maXJtKCdMb2dpbiBzdWNlc3NmdWwsIGNvbnRpbnVlIHRvIG5leHQgbGV2ZWwnKSkgew0KICAgICAgICAgICAgICAgIHdpbmRvdy5sb2NhdGlvbi5ocmVmID0gJ2xldmVsMi5waHAnOw0KICAgICAgICAgICAgfQ0KICAgICAgICB9IGVsc2Ugew0KICAgICAgICAgICAgYWxlcnQoJ05vdCB0aGlzIHRpbWUnKTsNCiAgICAgICAgICAgIGxvZ2luLnZhbCgnJyk7DQogICAgICAgICAgICBwYXNzd29yZC52YWwoJycpOw0KICAgICAgICB9DQogICAgICAgIHJldHVybiBmYWxzZTsNCiAgICB9KTs="></script>
+<script>
+    $(document).ready(function() {
+        $('.fancybox').fancybox();
+    });
+</script>
 </body>
 </html>

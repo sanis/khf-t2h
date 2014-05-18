@@ -32,6 +32,9 @@ if (isset($_POST['login'])) {
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+	<!-- Add fancyBox main JS and CSS files -->
+	<script type="text/javascript" src="<?php echo asset(str_replace('dist/','',$frontAssetDir.'source/jquery.fancybox.js')) ?>"></script>
+	<link rel="stylesheet" type="text/css" href="<?php echo asset(str_replace('dist/','',$frontAssetDir.'source/jquery.fancybox.css')) ?>" media="screen" />
 </head>
 <body>
 <!-- Login bar start -->
@@ -47,6 +50,12 @@ if (isset($_POST['login'])) {
         </div>
         <center>
             <div class="navbar-collapse collapse" id="navbar-main">
+		<ul class="nav navbar-nav">
+		<?php foreach ($level->suggestions as $suggestion) { ?>
+                    <li><a class="fancybox" href="#suggestion<?php echo $suggestion->id; ?>"><?php echo $suggestion->title; ?></a>
+                    </li>
+		<?php } ?>
+                </ul>
         <?php if (!Sentry::check()) { ?>
 
 
@@ -94,6 +103,14 @@ if (isset($_POST['login'])) {
         </div>
     </div>
 </div>
+<?php foreach ($level->suggestions as $suggestion) { ?>
+<div id="suggestion<?php echo $suggestion->id; ?>" style="width:100%;display: none;">
+<h3><?php echo $suggestion->title; ?></h3>
+<p>
+<?php echo nl2br($suggestion->text); ?>
+</p>
+</div>
+<?php } ?>
 <?php if (isset($_GET['success']) && $_GET['success']=='0') { ?>
     <script>
         alert('not this time');
@@ -101,5 +118,10 @@ if (isset($_POST['login'])) {
         $("#password").val('');
     </script>
 <?php } ?>
+<script>
+    $(document).ready(function() {
+        $('.fancybox').fancybox();
+    });
+</script>
 </body>
 </html>
