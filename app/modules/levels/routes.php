@@ -1,6 +1,4 @@
 <?php
-View::share('assetDir', Config::get('admin::paths.assetDir'));
-
 Route::group(array('prefix' => 'admin'), function () {
     Route::get('/levels.html',
         array(

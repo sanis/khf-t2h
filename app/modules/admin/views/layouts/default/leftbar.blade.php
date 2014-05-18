@@ -11,8 +11,8 @@
     </li>
     <li><a href="javascript:;"><i class="fa fa-file"></i> <span>Suggestions</span></a>
         <ul class="acc-menu">
-            <li><a href="/news.html">List suggestions</a></li>
-            <li><a href="/news.html">Create suggestion</a></li>
+            <li><a href="{{ URL::route('admin.suggestions') }}">List suggestions</a></li>
+            <li><a href="{{ URL::route('admin.suggestion.add') }}">Create suggestion</a></li>
         </ul>
     </li>
     <li><a href="javascript:;"><i class="fa fa-book"></i> <span>Logs</span></a>
