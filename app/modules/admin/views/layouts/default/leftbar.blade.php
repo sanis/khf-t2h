@@ -17,8 +17,8 @@
     </li>
     <li><a href="javascript:;"><i class="fa fa-book"></i> <span>Logs</span></a>
         <ul class="acc-menu">
-            <li><a href="/news.html">View logs</a></li>
-            <li><a href="/news.html">Empty all logs</a></li>
+            <li><a href="{{ URL::route('admin.logs') }}">View logs</a></li>
+            <li><a href="{{ URL::route('admin.log.deleteAll') }}">Empty all logs</a></li>
         </ul>
     </li>
     <li><a href="javascript:;"><i class="fa fa-user"></i> <span>Users & Groups</span></a>
