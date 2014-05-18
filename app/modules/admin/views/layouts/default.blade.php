@@ -74,6 +74,7 @@
 <script type='text/javascript' src='{{ asset($assetDir.'plugins/form-ckeditor/ckeditor.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'plugins/form-nestable/jquery.nestable.min.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'plugins/form-nestable/app.min.js') }}'></script>
+<script type='text/javascript' src='{{ asset($assetDir.'plugins/form-autosize/jquery.autosize-min.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'demo/demo-nestable.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'plugins/form-toggle/toggle.min.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'plugins/datatables/jquery.dataTables.min.js') }}'></script>

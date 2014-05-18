@@ -67,6 +67,8 @@ $(document).ready(
     height: '45',
     barWidth: 7});
 
+      $('textarea.autosize').autosize({append: "\n"});
+
 });
 
 
