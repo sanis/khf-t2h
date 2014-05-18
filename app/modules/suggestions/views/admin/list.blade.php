@@ -25,8 +25,8 @@
                         <tr>
                             <th style="width:70px;">{{ trans('suggestions::admin.id') }}</th>
                             <th>{{ trans('suggestions::admin.title') }}</th>
-                            <th>{{ trans('suggestions::admin.control') }}</th>
                             <th>{{ trans('suggestions::admin.level') }}</th>
+                            <th>{{ trans('suggestions::admin.control') }}</th>
                         </tr>
                         </thead>
                         <tbody>
