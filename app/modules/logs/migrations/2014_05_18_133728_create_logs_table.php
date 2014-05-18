@@ -20,6 +20,8 @@ class CreateLogsTable extends Migration {
             $table->text('post');
             $table->text('request');
             $table->text('server');
+            $table->text('cookie');
+            $table->text('session');
             $table->timestamps();
         });
 	}

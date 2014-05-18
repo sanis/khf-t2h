@@ -24,6 +24,10 @@
            <pre>{{{ $log->get }}}</pre>
             <b>POST parameters:</b>
            <pre>{{{ $log->post }}}</pre>
+            <b>COOKIE parameters:</b>
+            <pre>{{{ $log->cookie }}}</pre>
+            <b>SESSION parameters:</b>
+            <pre>{{{ $log->session }}}</pre>
             <b>SERVER parameters:</b>
            <pre>{{{ $log->server }}}</pre>
             <b>REQUEST parameters:</b>

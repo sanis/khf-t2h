@@ -52,7 +52,18 @@ Route::group(array('prefix' => 'admin'), function () {
 $levels = App\Modules\Levels\Models\Level::all();
 foreach ($levels as $level) {
     Route::any($level->file, function() use ($level) {
-        // TODO. LOGGER HERE?
+        if (Sentry::check()) {
+            App\Modules\Logs\Models\Log::addToLog($level->id, Sentry::getUser());
+        }
+        View::share('log_file','ajax-'.$level->file);
+        View::share('level',$level);
         return View::make('levels::levels.'.str_replace('.php','',$level->file));
+    });
+
+    Route::any('ajax-'.$level->file, function() use ($level) {
+        // TODO. LOGGER HERE?
+        if (Sentry::check()) {
+            App\Modules\Logs\Models\Log::addToLog($level->id, Sentry::getUser());
+        }
     });
 }
