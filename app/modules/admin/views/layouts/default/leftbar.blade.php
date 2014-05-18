@@ -5,8 +5,8 @@
     <li class="divider"></li>
     <li><a href="javascript:;"><i class="fa fa-rss-square"></i> <span>Levels</span></a>
         <ul class="acc-menu">
-            <li><a href="/news.html">List levels</a></li>
-            <li><a href="/news.html">Create new</a></li>
+            <li><a href="{{ URL::route('admin.levels') }}">List levels</a></li>
+            <li><a href="{{ URL::route('admin.level.add') }}">Create new</a></li>
         </ul>
     </li>
     <li><a href="javascript:;"><i class="fa fa-file"></i> <span>Suggestions</span></a>
