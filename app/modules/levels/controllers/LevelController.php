@@ -1,7 +1,7 @@
 <?php
 namespace App\Modules\Levels\Controllers;
 
-use View, Input, Config, Sentry, Notification, Redirect, Mail, URL, Validator, File,
+use View, Input, Config, Sentry, Notification, Redirect, Mail, URL, Validator, File, DB,
     \App\Modules\Levels\Models\Level;
 
 /**
@@ -84,6 +84,19 @@ class LevelController extends \BaseController
         $level->delete();
         Notification::info(trans('levels::admin.deleted'));
         return Redirect::route('admin.levels');
+    }
+
+    public function userTop() {
+        $users = DB::select(DB::raw('SELECT users.first_name, users.last_name, user, COUNT(level) AS levels, SUM(tries) AS tries FROM (
+	                                    SELECT user, level, COUNT(*) AS tries
+	                                    FROM logs
+	                                    GROUP BY user, level
+                                      ) a
+                                      LEFT JOIN users ON a.user = users.id
+                                      GROUP BY user
+                                      ORDER BY levels DESC, tries ASC;'));
+        View::share('top_users', $users);
+        return View::make('levels::pages.usertop');
     }
 
 }
