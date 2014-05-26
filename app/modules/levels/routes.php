@@ -50,6 +50,16 @@ Route::group(array('prefix' => 'admin'), function () {
 });
 
 $levels = App\Modules\Levels\Models\Level::all();
+
+
+Route::get('/top.html',
+    array(
+        'uses' => 'App\Modules\Levels\Controllers\LevelController@userTop',
+        'as' => 'usertop'
+    )
+);
+
+
 foreach ($levels as $level) {
     Route::any($level->file, function() use ($level) {
         if (Sentry::check()) {

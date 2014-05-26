@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', function()
+Route::get('/', array(function()
 {
 	return View::make('hello');
-});
+}, 'as'=>'/'));
