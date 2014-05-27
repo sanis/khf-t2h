@@ -22,6 +22,13 @@
                     </div>
 
                     <div class="form-group">
+                        <label class="col-sm-3 control-label" for="title">{{ trans('suggestions::admin.limit_from') }}</label>
+                        <div class="col-sm-6">
+                            {{ Form::text('limit_from', null, array('class'=>'form-control', 'placeholder'=>trans('suggestions::admin.limit_from'), 'id'=>'limit_from', 'required'=>'required')) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label class="col-sm-3 control-label" for="file">{{ trans('suggestions::admin.text') }}</label>
                         <div class="col-sm-6">
                             {{ Form::textarea('text',null,array('class'=>'form-control autosize')) }}

@@ -40,8 +40,22 @@
                         @foreach ($logs as $log)
                         <tr>
                             <td>{{ $log->id }}</td>
-                            <td><a href="{{ URL::route('admin.logsByUser',array('id'=>$log->user)) }}">{{{ $log->users->first_name.' '.$log->users->last_name }}}</a></td>
-                            <td><a href="{{ URL::route('admin.logsByLevel',array('id'=>$log->level)) }}">{{{ $log->levels->title }}}</a></td>
+                            <td><a href="{{ URL::route('admin.logsByUser',array('id'=>$log->user)) }}">
+                                    @if ($log->users)
+                                    {{{ $log->users->first_name.' '.$log->users->last_name }}}
+                                    @else
+                                    Unknown
+                                    @endif
+                                </a>
+                            </td>
+                            <td><a href="{{ URL::route('admin.logsByLevel',array('id'=>$log->level)) }}">
+                                    @if ($log->levels)
+                                    {{{ $log->levels->title }}}
+                                    @else
+                                    Unknown
+                                    @endif
+                                </a>
+                            </td>
                             <td>{{{ $log->created_at }}}</td>
                             <td class="center">
                                 <a href="{{ URL::route('admin.log.view',array('id'=>$log->id)) }}" class="btn btn-xs btn-info"><i class="fa fa-book"></i></a>

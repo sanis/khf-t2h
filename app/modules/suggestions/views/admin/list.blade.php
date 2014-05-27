@@ -34,7 +34,13 @@
                         <tr>
                             <td>{{ $suggestion->id }}</td>
                             <td>{{{ $suggestion->title }}}</td>
-                            <td>{{{ $suggestion->levels->title }}}</td>
+                            <td>
+                                @if ($suggestion->levels)
+                                {{{ $suggestion->levels->title }}}
+                                @else
+                                Unknown
+                                @endif
+                            </td>
                             <td class="center">
                                 <a href="{{ URL::route('admin.suggestion.edit',array('id'=>$suggestion->id)) }}" class="btn btn-xs btn-info"><i class="fa fa-edit"></i></a>
                                 <a href="{{ URL::route('admin.suggestion.delete',array('id'=>$suggestion->id)) }}" class="btn btn-xs btn-danger"><i class="fa fa-minus-square"></i></a>

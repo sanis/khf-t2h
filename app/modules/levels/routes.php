@@ -64,7 +64,9 @@ foreach ($levels as $level) {
     Route::any($level->file, function() use ($level) {
         if (Sentry::check()) {
             App\Modules\Logs\Models\Log::addToLog($level->id, Sentry::getUser());
-        }
+            $tries = DB::selectOne('SELECT count(*) FROM logs WHERE user="'.Sentry::getUser()->getId().'" AND level="'.$level->id.'"');
+        } else { $tries = 0; }
+        View::share('tries',$tries);
         View::share('log_file','ajax-'.$level->file);
         View::share('level',$level);
         return View::make('levels::levels.'.str_replace('.php','',$level->file));

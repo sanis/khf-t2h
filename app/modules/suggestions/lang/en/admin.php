@@ -16,4 +16,5 @@ return array(
     'saved' => 'Suggestion saved',
     'text' => 'Text',
     'level' => 'Level',
+    'limit_from' => 'Tries after show suggestion',
 );

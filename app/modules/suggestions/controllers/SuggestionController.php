@@ -30,6 +30,7 @@ class SuggestionController extends \BaseController
         $validator = Validator::make($input, array(
                 'title' => 'required|max:255',
                 'level' => 'required|integer',
+                'limit_from' => 'required|integer',
                 'text' => 'required'
             )
         );
@@ -41,6 +42,7 @@ class SuggestionController extends \BaseController
             $suggestion->title = $input['title'];
             $suggestion->level = $input['level'];
             $suggestion->text = $input['text'];
+            $suggestion->limit_from = $input['limit_from'];
 
             if ($suggestion->save()) {
                 Notification::success(trans('suggestions::admin.created'));
@@ -63,6 +65,7 @@ class SuggestionController extends \BaseController
         $validator = Validator::make($input, array(
                 'title' => 'required|max:255',
                 'level' => 'required|integer',
+                'limit_from' => 'required|integer',
                 'text' => 'required'
             )
         );
@@ -73,6 +76,7 @@ class SuggestionController extends \BaseController
             $suggestion->title = $input['title'];
             $suggestion->level = $input['level'];
             $suggestion->text = $input['text'];
+            $suggestion->limit_from = $input['limit_from'];
             $suggestion->save();
             Notification::success(trans('suggestions::admin.saved'));
             return Redirect::route('admin.suggestions');
