@@ -88,7 +88,7 @@
                         </thead>
                         <?php foreach ($top_users as $top_user) { ?>
                             <tr>
-                                <td><?php if ($top_user->first_name!=NULL && $top_user->first_name!=NULL) { echo $top_user->first_name . ' ' . $top_user->last_name; } else { echo '<em>Nežinomas</em>'; } ?></td>
+                                <td><?php if ($top_user->first_name!=NULL && $top_user->last_name!=NULL) { echo $top_user->first_name . ' ' . $top_user->last_name; } else { echo '<em>Unknown</em>'; } ?></td>
                                 <td><?php echo $top_user->levels; ?></td>
                                 <td><?php echo $top_user->tries; ?></td>
                             </tr>

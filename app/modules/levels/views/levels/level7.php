@@ -31,10 +31,12 @@
         <center>
             <div class="navbar-collapse collapse" id="navbar-main">
 		<ul class="nav navbar-nav">
-		<?php foreach ($level->suggestions as $suggestion) { ?>
+		<?php foreach ($level->suggestions as $suggestion) {
+            if ($suggestion->limit_from <= $tries) {
+            ?>
                     <li><a class="fancybox" href="#suggestion<?php echo $suggestion->id; ?>"><?php echo $suggestion->title; ?></a>
                     </li>
-		<?php } ?>
+		<?php } } ?>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <b class="caret"></b></a>
                 <ul class="dropdown-menu">
@@ -91,14 +93,15 @@
         </div>
     </div>
 </div>
-<?php foreach ($level->suggestions as $suggestion) { ?>
+<?php foreach ($level->suggestions as $suggestion) {
+if ($suggestion->limit_from <= $tries) { ?>
 <div id="suggestion<?php echo $suggestion->id; ?>" style="width:100%;display: none;">
 <h3><?php echo $suggestion->title; ?></h3>
 <p>
 <?php echo nl2br($suggestion->text); ?>
 </p>
 </div>
-<?php } ?>
+<?php } } ?>
     <script>
         $('#login-form').submit(function (e) {
             alert('not this time');
