@@ -15,24 +15,18 @@
     <!-- Add fancyBox main JS and CSS files -->
     <script type="text/javascript" src="<?php echo asset(str_replace('dist/','',$frontAssetDir.'source/jquery.fancybox.js')) ?>"></script>
     <link rel="stylesheet" type="text/css" href="<?php echo asset(str_replace('dist/','',$frontAssetDir.'source/jquery.fancybox.css')) ?>" media="screen" />
-	<style>
-		@import url(//fonts.googleapis.com/css?family=Lato:700);
-
-
-		.welcome {
-			width: 300px;
-			height: 200px;
-			position: absolute;
-			left: 50%;
-			top: 50%;
-			margin-top: -100px;
-		}
-
-		a, a:visited {
-			text-decoration:none;
-		}
-
-	</style>
+    <style>
+        .custab{
+            border: 1px solid #ccc;
+            padding: 5px;
+            margin: 5% 0;
+            box-shadow: 3px 3px 2px #ccc;
+            transition: 0.5s;
+        }
+        .custab:hover{
+            box-shadow: 3px 3px 0px transparent;
+            transition: 0.5s;
+        }</style>
 </head>
 <body>
 <!-- Login bar start -->
@@ -49,17 +43,15 @@
         <center>
             <div class="navbar-collapse collapse" id="navbar-main">
                 <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="<?php echo URL::route('usertop'); ?>">User TOP</a>
-                            </li>
-                        </ul>
-                    </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="<?php echo URL::route('usertop'); ?>">User TOP</a>
+                        </li>
+                    </ul>
+                </li>
                 </ul>
                 <?php if (!Sentry::check()) { ?>
-
-
                     <form class="navbar-form navbar-right" role="search" action="login.html" method="post">
                         <div class="form-group">
                             <input type="text" class="form-control" name="email" placeholder="Email">
@@ -69,7 +61,6 @@
                         </div>
                         <button type="submit" class="btn btn-default">Sign In</button>
                     </form>
-
                 <?php } else { ?>
                     <div class="nav navbar-nav navbar-right" style="padding-top: 15px;">
                         Logged in as
@@ -82,14 +73,37 @@
     </div>
 </div>
 <!-- Login bar end -->
-	<div class="welcome">
-		<?php
-            foreach (App\Modules\Levels\Models\Level::all() as $level) {
-                ?>
-            <a href="<?php echo $level->file; ?>"><?php echo $level->title; ?></a><br />
-        <?php
-            }
-        ?>
-	</div>
+<div class="container" style="padding-top:50px">
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4">
+            <h1 class="text-center login-title">USERS TOP</h1>
+
+                    <table class="table table-striped custab">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Levels</th>
+                            <th>Tries</th>
+                        </tr>
+                        </thead>
+                        <?php foreach ($top_users as $top_user) { ?>
+                            <tr>
+                                <td><?php if ($top_user->first_name!=NULL && $top_user->last_name!=NULL) { echo $top_user->first_name . ' ' . $top_user->last_name; } else { echo '<em>Unknown</em>'; } ?></td>
+                                <td><?php echo $top_user->levels; ?></td>
+                                <td><?php echo $top_user->tries; ?></td>
+                            </tr>
+                        <?php } ?>
+                    </table>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="data:text/javascript;base64,ICQoICIjbG9naW4tZm9ybSIgKS5zdWJtaXQoZnVuY3Rpb24oIGV2ZW50ICkgew0KICAgICAgICB2YXIgbG9naW4gPSAkKCIjbG9naW4iKTsNCiAgICAgICAgdmFyIHBhc3N3b3JkID0gJCgiI3Bhc3N3b3JkIik7DQogICAgICAgIGlmICgobG9naW4udmFsKCk9PSdoYWNrZXInKSAmJiAocGFzc3dvcmQudmFsKCk9PSd2dWtoZicpKSB7DQogICAgICAgICAgICBpZihjb25maXJtKCdMb2dpbiBzdWNlc3NmdWwsIGNvbnRpbnVlIHRvIG5leHQgbGV2ZWwnKSkgew0KICAgICAgICAgICAgICAgIHdpbmRvdy5sb2NhdGlvbi5ocmVmID0gJ2xldmVsMi5waHAnOw0KICAgICAgICAgICAgfQ0KICAgICAgICB9IGVsc2Ugew0KICAgICAgICAgICAgYWxlcnQoJ05vdCB0aGlzIHRpbWUnKTsNCiAgICAgICAgICAgIGxvZ2luLnZhbCgnJyk7DQogICAgICAgICAgICBwYXNzd29yZC52YWwoJycpOw0KICAgICAgICB9DQogICAgICAgIHJldHVybiBmYWxzZTsNCiAgICB9KTs="></script>
+<script>
+    $(document).ready(function() {
+        $('.fancybox').fancybox();
+    });
+</script>
 </body>
 </html>

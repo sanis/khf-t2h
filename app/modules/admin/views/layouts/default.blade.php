@@ -74,12 +74,14 @@
 <script type='text/javascript' src='{{ asset($assetDir.'plugins/form-ckeditor/ckeditor.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'plugins/form-nestable/jquery.nestable.min.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'plugins/form-nestable/app.min.js') }}'></script>
+<script type='text/javascript' src='{{ asset($assetDir.'plugins/form-autosize/jquery.autosize-min.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'demo/demo-nestable.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'plugins/form-toggle/toggle.min.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'plugins/datatables/jquery.dataTables.min.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'plugins/datatables/dataTables.bootstrap.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'demo/demo-datatables.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'plugins/form-parsley/parsley.min.js') }}'></script>
+<script type='text/javascript' src='{{ asset($assetDir.'plugins/form-jasnyupload/fileinput.min.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'demo/demo-formvalidation.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'js/placeholdr.js') }}'></script>
 <script type='text/javascript' src='{{ asset($assetDir.'js/application.js') }}'></script>

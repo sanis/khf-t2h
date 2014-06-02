@@ -5,20 +5,20 @@
     <li class="divider"></li>
     <li><a href="javascript:;"><i class="fa fa-rss-square"></i> <span>Levels</span></a>
         <ul class="acc-menu">
-            <li><a href="/news.html">List levels</a></li>
-            <li><a href="/news.html">Create new</a></li>
+            <li><a href="{{ URL::route('admin.levels') }}">List levels</a></li>
+            <li><a href="{{ URL::route('admin.level.add') }}">Create new</a></li>
         </ul>
     </li>
     <li><a href="javascript:;"><i class="fa fa-file"></i> <span>Suggestions</span></a>
         <ul class="acc-menu">
-            <li><a href="/news.html">List suggestions</a></li>
-            <li><a href="/news.html">Create suggestion</a></li>
+            <li><a href="{{ URL::route('admin.suggestions') }}">List suggestions</a></li>
+            <li><a href="{{ URL::route('admin.suggestion.add') }}">Create suggestion</a></li>
         </ul>
     </li>
     <li><a href="javascript:;"><i class="fa fa-book"></i> <span>Logs</span></a>
         <ul class="acc-menu">
-            <li><a href="/news.html">View logs</a></li>
-            <li><a href="/news.html">Empty all logs</a></li>
+            <li><a href="{{ URL::route('admin.logs') }}">View logs</a></li>
+            <li><a href="{{ URL::route('admin.log.deleteAll') }}">Empty all logs</a></li>
         </ul>
     </li>
     <li><a href="javascript:;"><i class="fa fa-user"></i> <span>Users & Groups</span></a>
